@@ -6,6 +6,7 @@ import 'package:rentmylove/screens/budget_screens/budget_screen.dart';
 import 'package:rentmylove/screens/calendar_screen.dart';
 import 'package:rentmylove/screens/edit_product_screen.dart';
 import 'package:rentmylove/screens/list_of_product_screen.dart';
+import 'firebase_options.dart';
 
 void main() {
   runApp(const MyApp());
