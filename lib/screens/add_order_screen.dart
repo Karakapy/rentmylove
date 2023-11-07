@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../color_preset.dart';
+
 class AddOrderScreen extends StatefulWidget {
   const AddOrderScreen({super.key});
 
@@ -11,6 +13,8 @@ class AddOrderScreen extends StatefulWidget {
 class _AddOrderScreenState extends State<AddOrderScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        backgroundColor: wallpaper,
+        );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rentmylove/color_preset.dart';
+import 'package:rentmylove/widgets/nav_bar_widget.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -8,10 +10,19 @@ class CalendarScreen extends StatefulWidget {
   State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-
 class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        backgroundColor: wallpaper,
+        bottomNavigationBar: NavBarWidget(currentIndex: 0,),
+        body: Container(
+          child: const Center(
+              child: Text(
+            "Home",
+            // style: TextStyle(color: Colors.black),
+          )),
+        )
+    );
   }
 }
