@@ -4,29 +4,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrderModel{
 
-  final String customerID;
+  final String customerName;
   final String productID;
   final DateTime startDate;
   final DateTime endDate;
   final String note;
   final double amount;
+  final String deliverMethod;
 
   OrderModel({
     required this.productID,
-    required this.customerID,
+    required this.customerName,
     required this.startDate,
     required this.endDate,
     required this.amount,
-    required this.note
+    required this.note,
+    required this.deliverMethod
 });
 
   static Map<String , dynamic> toJson(OrderModel orderModel) => {
     'Product ID' : orderModel.productID,
-    'Customer ID' : orderModel.customerID,
+    'Customer Name' : orderModel.customerName,
     'Start Date' : orderModel.startDate,
     'End Date' : orderModel.endDate,
     'Amount' : orderModel.amount,
-    'note' : orderModel.note
+    'note' : orderModel.note,
+    'Deliver Method': orderModel.deliverMethod
   };
 
   factory OrderModel.fromJson(QueryDocumentSnapshot<Object?> doc) {
@@ -34,10 +37,11 @@ class OrderModel{
 
     return OrderModel(
         productID: data["Product ID"],
-        customerID: data["Customer ID"],
+        customerName: data["Customer Name"],
         startDate: data["Start Date"].toDate(),
         endDate: data["End Date"].toDate(),
         amount: data["Amount"].toDouble(),
+        deliverMethod: data["Deliver Method"],
         note: data["Note"]);
 
   }
