@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentmylove/firebase_options.dart';
 import 'package:rentmylove/screens/add_order_screen.dart';
 import 'package:rentmylove/screens/add_product_screen.dart';
 import 'package:rentmylove/screens/budget_screens/add_transaction_screen.dart';
@@ -6,10 +7,19 @@ import 'package:rentmylove/screens/budget_screens/budget_screen.dart';
 import 'package:rentmylove/screens/calendar_screen.dart';
 import 'package:rentmylove/screens/edit_product_screen.dart';
 import 'package:rentmylove/screens/list_of_product_screen.dart';
-import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:rentmylove/service/firebase_service.dart';
+import 'package:rentmylove/service/order_manager.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter binding is initialized
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await firebaseService.initializeFirebase();
+  await OrderManager.init();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
