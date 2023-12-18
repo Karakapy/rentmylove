@@ -15,9 +15,18 @@ class ProductManager{
 
   }
 
-  static String getProductID(String name, String color, String size){
+  static String createProductID(String name, String color, String size){
 
     return "${name.toLowerCase().replaceAll(' ', '')}$color$size";
+  }
+
+  static String getProductID(String name, String color, String size){
+    for(ProductModel product in productList){
+      if(product.name == name && product.color == color && product.size == size){
+        return product.productID;
+      }
+    }
+    return '';
   }
 
   static Future<List<ProductModel>> loadProductsFromFirestore() async {
