@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:rentmylove/service/firebase_service.dart';
 import 'package:rentmylove/service/order_manager.dart';
 import 'package:rentmylove/service/product_detail_manager.dart';
+import 'package:rentmylove/service/product_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter binding is initialized
@@ -20,6 +21,7 @@ Future<void> main() async {
   await firebaseService.initializeFirebase();
   await OrderManager.init();
   await ProductDetailManager.init();
+  await ProductManager.init();
   runApp(const MyApp());
 
 }
@@ -51,7 +53,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      // initialRoute: '/',
+      initialRoute: '/addOrder',
       routes: {
         '/': (context) => CalendarScreen(),
         '/addOrder': (context) => AddOrderScreen(),

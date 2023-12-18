@@ -9,7 +9,7 @@ class OrderModel{
   final DateTime startDate;
   final DateTime endDate;
   final String note;
-  final double amount;
+  final int amount;
   final String deliverMethod;
 
   OrderModel({
@@ -36,13 +36,14 @@ class OrderModel{
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return OrderModel(
-        productID: data["Product ID"],
-        customerName: data["Customer Name"],
+        productID: data["Product ID"]??"",
+        customerName: data["Customer Name"]??"",
         startDate: data["Start Date"].toDate(),
         endDate: data["End Date"].toDate(),
-        amount: data["Amount"].toDouble(),
+        amount: data["Amount"],
         deliverMethod: data["Deliver Method"],
-        note: data["Note"]);
+        note: data["Note"]??""
+    );
 
   }
 

@@ -11,7 +11,7 @@ class ProductManager{
   static Future<void> init() async {
     _firebaseFirestore = firebaseService.getFirestore();
     productList = await loadProductsFromFirestore();
-    print(productList.first.quantity);
+    print(getProductID("Shirt", "Red", "M"));
 
   }
 
@@ -22,7 +22,7 @@ class ProductManager{
 
   static String getProductID(String name, String color, String size){
     for(ProductModel product in productList){
-      if(product.name == name && product.color == color && product.size == size){
+      if(product.name.toLowerCase() == name.toLowerCase() && product.color == color && product.size == size){
         return product.productID;
       }
     }

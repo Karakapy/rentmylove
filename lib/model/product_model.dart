@@ -6,7 +6,7 @@ class ProductModel{
 
   final String color;
   final String name;
-  final double quantity;
+  final int quantity;
   final String size;
   final String productID;
 
@@ -35,7 +35,7 @@ class ProductModel{
         productID: data["Product ID"],
         color: data["Color"],
         name: data["Name"],
-        quantity: data["Quantity"].toDouble(),
+        quantity: data["Quantity"],
         size: data["Size"]);
 
   }
