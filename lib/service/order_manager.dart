@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rentmylove/model/income_model.dart';
 import 'package:rentmylove/model/order_model.dart';
 import 'package:rentmylove/service/product_manager.dart';
 
@@ -21,8 +22,17 @@ class OrderManager{
     return newOrder;
   }
 
+  static String orderID(OrderModel currentOrder){
+    return "${currentOrder.customerName.toLowerCase()}${currentOrder.productID.toLowerCase()}${currentOrder.startDate}${currentOrder.endDate}";
+  }
+
   static void uploadToFirebase(OrderModel currentOrder){
-    _firebaseFirestore.collection("Order").add(OrderModel.toJson(currentOrder)).then((value) => print("Order Added")).catchError((error) => print("Error at add Order $error"));
+    String currentOrderID = orderID(currentOrder);
+    IncomeModel incomeModel = IncomeModel(date: DateTime.now(), orderID: currentOrderID, detail: "Income from Rent", amount: currentOrder.amount);
+
+    _firebaseFirestore.collection("Order").doc(currentOrderID).set(OrderModel.toJson(currentOrder)).then((value) => print("Order Added")).catchError((error) => print("Error at add Order $error"));
+
+    _firebaseFirestore.collection("Income").doc("Income ${DateTime.now()}").set(IncomeModel.toJson(incomeModel));
   }
 
   static Future<List<OrderModel>> loadOrdersFromFirestore() async {

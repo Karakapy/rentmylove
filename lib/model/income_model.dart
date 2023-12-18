@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class IncomeModel{
 
   final String detail;
-  final double amount;
+  final int amount;
   final DateTime date;
   final String orderID;
 
@@ -33,7 +33,7 @@ class IncomeModel{
         orderID: data["Order ID"],
         date: data["Date"].toDate(),
         detail: data["Detail"],
-        amount: data["Amount"].toDouble());
+        amount: data["Amount"]);
 
   }
 

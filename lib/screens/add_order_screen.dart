@@ -22,7 +22,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
     super.initState();
     productNameList = ProductManager.productList.map((product) => product.name).toList();
     print("PRODUCT LSIT $productNameList");
-    OrderModel currentOrder = OrderManager.createOrder("Shirt", "M", "Red", DateTime.now(), 5, "Nut", "Post Man", 2000, "None");
+    OrderModel currentOrder = OrderManager.createOrder("Shirt", "M", "Red", DateTime.now(), 5, "Bam", "Post Man", 2000, "None");
     OrderManager.uploadToFirebase(currentOrder);
 
   }
