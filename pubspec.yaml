@@ -36,6 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   firebase_core: ^2.21.0
+  dotted_border: ^2.1.0
+  dropdown_button2: ^2.3.9
+  calendar_date_picker2: ^0.5.3
 
 dev_dependencies:
   flutter_test:
