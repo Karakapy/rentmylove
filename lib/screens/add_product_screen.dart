@@ -24,10 +24,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       appBar: const CustomAppBar(),
       body: Container(
         margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
+        child: ListView(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   const Text(
@@ -37,18 +34,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   const SizedBox(height: 10),
                   const Text('ชื่อชุด', style: RmlTextStyle.normalText),
                   const SizedBox(height: 5),
-                  TextFieldWidget(width: screenWidth),
+                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
                   const SizedBox(height: 10),
                   ProductListWidget(width: screenWidth),
+                  const SizedBox(height: 190),
+                  SaveButtonWidget(
+                    tapFunc: () {},
+                  ),
                 ],
               ),
-            ),
-            SaveButtonWidget(
-              tapFunc: () {},
-            ),
-          ],
         ),
-      ),
     );
   }
 }

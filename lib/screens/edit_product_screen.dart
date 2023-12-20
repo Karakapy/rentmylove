@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:rentmylove/text_style.dart';
 import 'package:rentmylove/widgets/product_list_widget.dart';
 import 'package:rentmylove/widgets/text_field.dart';
@@ -24,10 +23,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       appBar: const CustomAppBar(),
       body: Container(
         margin: EdgeInsets.only(bottom: 20),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
+        child: ListView(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   const Text(
@@ -37,18 +33,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   const SizedBox(height: 10),
                   const Text('ชื่อชุด', style: RmlTextStyle.normalText),
                   const SizedBox(height: 5),
-                  TextFieldWidget(width: screenWidth),
+                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
                   const SizedBox(height: 10),
                   ProductListWidget(width: screenWidth),
+                  const SizedBox(height: 190),
+                  SaveButtonWidget(
+                    tapFunc: () {},
+                  ),
                 ],
               ),
             ),
-            SaveButtonWidget(
-              tapFunc: () {},
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -139,21 +139,9 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("จำนวน",style: RmlTextStyle.normalText,),
-                    Container(
-                      width: widget.width * 0.7,
-                      child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                        ),
-                      ),
-                    )
-                ],
+                    TextFieldWidget(width: widget.width * 0.7, inputType: TextInputType.text,),
+
+                  ],
             )
 
           ],
