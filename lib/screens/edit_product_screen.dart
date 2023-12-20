@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:rentmylove/text_style.dart';
+import 'package:rentmylove/widgets/delete_button_widget.dart';
 import 'package:rentmylove/widgets/product_list_widget.dart';
 import 'package:rentmylove/widgets/text_field.dart';
 import '../color_preset.dart';
@@ -36,7 +37,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
                   const SizedBox(height: 10),
                   ProductListWidget(width: screenWidth),
-                  const SizedBox(height: 250),
+                  const SizedBox(height: 185),
+                  DeleteButtonWidget(
+                    tapFunc: () {},
+                  ),
+                  const SizedBox(height:10),
                   SaveButtonWidget(
                     tapFunc: () {},
                   ),
