@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final double width;
+  final TextInputType inputType;
 
-  const TextFieldWidget({required this.width});
+  const TextFieldWidget({required this.width, required this.inputType});
 
   @override
   _TextFieldWidgetState createState() => _TextFieldWidgetState();
@@ -15,6 +16,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return Container(
       width: widget.width,
       child: TextField(
+        keyboardType: widget.inputType,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
