@@ -11,7 +11,7 @@ class RmlTextStyle {
 
   static const TextStyle sectionTitle = TextStyle(
     color: text,
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: FontWeight.bold,
     fontFamily: "Kanit"
   );

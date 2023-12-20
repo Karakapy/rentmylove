@@ -3,6 +3,7 @@ import 'package:rentmylove/screens/add_order_screen.dart';
 import 'package:rentmylove/screens/add_product_screen.dart';
 import 'package:rentmylove/screens/budget_screens/add_transaction_screen.dart';
 import 'package:rentmylove/screens/budget_screens/budget_screen.dart';
+import 'package:rentmylove/screens/budget_screens/edit_transaction_screen.dart';
 import 'package:rentmylove/screens/calendar_screen.dart';
 import 'package:rentmylove/screens/edit_product_screen.dart';
 import 'package:rentmylove/screens/list_of_product_screen.dart';
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/addProduct': (context) => AddProductScreen(),
         '/editProduct': (context) => EditProductScreen(),
         '/budget': (context) => BudgetScreen(),
-        '/addTransaction': (context) => AddTransactionScreen()
+        '/addTransaction': (context) => AddTransactionScreen(),
+        '/editTransaction': (context) => EditTransactionScreen(),
       },
     );
   }
