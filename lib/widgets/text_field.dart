@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentmylove/text_style.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final double width;
@@ -16,6 +17,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return Container(
       width: widget.width,
       child: TextField(
+        style: RmlTextStyle.normalText,
         keyboardType: widget.inputType,
         decoration: InputDecoration(
           border: OutlineInputBorder(

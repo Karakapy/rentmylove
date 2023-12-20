@@ -37,7 +37,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
                   const SizedBox(height: 10),
                   ProductListWidget(width: screenWidth),
-                  const SizedBox(height: 190),
+                  const SizedBox(height: 250),
                   SaveButtonWidget(
                     tapFunc: () {},
                   ),
