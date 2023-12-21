@@ -79,20 +79,11 @@ class _ListOfProductScreenState extends State<ListOfProductScreen> {
             ),
             SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 3,
-                  (context, index) => ProductCard())
+                  childCount: 10,
+                  (context, index) => ProductCard(name: "hello", size: "XS", color: "ดำ", amount: 2,))
             )
         ]
         )
-
-        // Center(
-        //       child: TextButton(
-        //         onPressed: () {
-        //           Navigator.of(context).push(_createRoute());
-        //         },
-        //         child: Text("Add product"),
-        //       )
-        //   ),
-        );
+    );
   }
 }

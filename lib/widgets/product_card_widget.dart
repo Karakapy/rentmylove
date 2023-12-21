@@ -4,7 +4,11 @@ import 'package:rentmylove/text_style.dart';
 import '../screens/edit_product_screen.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key});
+  String name;
+  String size;
+  String color;
+  int amount;
+  ProductCard({required this.name, required this.size, required this.color, required this.amount});
 
   Route _createRoute() {
     return PageRouteBuilder(
@@ -44,13 +48,28 @@ class ProductCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           Text("ชื่อชุด", style: RmlTextStyle.normalText,),
+           Text("ชื่อชุด ${this.name}", style: RmlTextStyle.normalText,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("ไซซ์: XL", style: RmlTextStyle.normalText,),
-                Text("สี:ชมพูบานเย็น", style: RmlTextStyle.normalText,),
-                Text("จำนวน: 2", style: RmlTextStyle.normalText,)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("ไซซ์: ${this.size}", style: RmlTextStyle.normalText,),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("สี: ${this.color}", style: RmlTextStyle.normalText,),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("จำนวน: ${this.amount}", style: RmlTextStyle.normalText,)
+                  ],
+                ),
               ],
             )
           ],
