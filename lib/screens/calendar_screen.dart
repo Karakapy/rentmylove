@@ -5,6 +5,7 @@ import 'package:rentmylove/color_preset.dart';
 import 'package:rentmylove/text_style.dart';
 import 'package:rentmylove/widgets/nav_bar_widget.dart';
 import 'package:draggable_home/draggable_home.dart';
+import 'package:rentmylove/widgets/order_card_widget.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -26,8 +27,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ],
           headerWidget: headerWidget(context),
           headerExpandedHeight: 0.55,
-          backgroundColor: CupertinoColors.white,
-          appBarColor: wallpaper,
+          backgroundColor: wallpaper,
+          appBarColor: Colors.white,
           bottomNavigationBar: NavBarWidget(
             currentIndex: 0,
           ),
@@ -45,6 +46,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           body: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
+              color: wallpaper,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -62,7 +64,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Widget headerWidget(BuildContext context) {
     return Container(
-      color: wallpaper,
+      color: Colors.white,
       child: Center(
         child: Text("Title"),
       ),
@@ -73,18 +75,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 20,
+      itemCount: 10,
       shrinkWrap: true,
-      itemBuilder: (context, index) => Card(
-        color: Colors.white70,
-        child: ListTile(
-          leading: CircleAvatar(
-            child: Text("$index"),
-          ),
-          title: const Text("Title"),
-          subtitle: const Text("Subtitle"),
-        ),
-      ),
+      itemBuilder: (context, index) =>
+          OrderCardWidget()
+      //     Card(
+      //   color: Colors.white70,
+      //   child: ListTile(
+      //     leading: CircleAvatar(
+      //       child: Text("$index"),
+      //     ),
+      //     title: const Text("Title"),
+      //     subtitle: const Text("Subtitle"),
+      //   ),
+      // ),
     );
   }
 }
