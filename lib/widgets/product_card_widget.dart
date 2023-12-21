@@ -52,23 +52,18 @@ class ProductCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                Expanded(
+                  child:
                     Text("ไซซ์: ${this.size}", style: RmlTextStyle.normalText,),
-                  ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                Expanded(
+                  child:
                     Text("สี: ${this.color}", style: RmlTextStyle.normalText,),
-                  ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text("จำนวน: ${this.amount}", style: RmlTextStyle.normalText,)
-                  ],
+                Expanded(
+                  child:
+                    Text("จำนวน: ${this.amount}", style: RmlTextStyle.normalText,
+                    textAlign: TextAlign.end,)
                 ),
               ],
             )
