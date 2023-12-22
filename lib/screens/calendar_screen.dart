@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:rentmylove/color_preset.dart';
+import 'package:rentmylove/screens/add_order_screen.dart';
 import 'package:rentmylove/text_style.dart';
 import 'package:rentmylove/widgets/nav_bar_widget.dart';
 import 'package:draggable_home/draggable_home.dart';
@@ -15,6 +16,25 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const AddOrderScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DraggableHome(
@@ -78,7 +98,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       itemCount: 10,
       shrinkWrap: true,
       itemBuilder: (context, index) =>
-          OrderCardWidget()
+          OrderCardWidget(product: "hello",productSize: "M",productColor: "น้ำเงิน",name: "นีน่า", phone: "091-234-5678",)
       //     Card(
       //   color: Colors.white70,
       //   child: ListTile(

@@ -7,4 +7,5 @@ const lightGreen = Color(0xffC7F4BB);
 const grey = Color(0xff727272);
 const text = Colors.black;
 const red = Color(0xffCC4545);
+const lightRed = Color(0xfffaa7a7);
 const lightBrown = Color(0xffDBC9B9);
