@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rentmylove/color_preset.dart';
+import 'package:rentmylove/screens/add_order_screen.dart';
 import 'package:rentmylove/text_style.dart';
 
 class OrderCardWidget extends StatelessWidget {
@@ -20,9 +21,31 @@ class OrderCardWidget extends StatelessWidget {
   bool send = true;
   bool msg = false;
 
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const AddOrderScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+        onTap: () {
+      Navigator.of(context).push(_createRoute());
+    },
+      child: Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       margin: EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
@@ -114,6 +137,7 @@ class OrderCardWidget extends StatelessWidget {
           ),
           ),
         ],
+      ),
       ),
     );
   }

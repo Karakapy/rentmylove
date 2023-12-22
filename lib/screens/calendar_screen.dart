@@ -38,6 +38,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return DraggableHome(
+          leading: null,
           title: const Text(
             "ออเดอร์",
             style: RmlTextStyle.sectionTitle,
