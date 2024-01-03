@@ -10,16 +10,21 @@ class OrderCardWidget extends StatelessWidget {
   String productSize;
   String name;
   String phone;
+  bool send;
+  bool msg;
 
   OrderCardWidget({
     required this.product,
     required this.productColor,
     required this.productSize,
     required this.name,
-    required this.phone});
+    required this.phone,
+    required this.send,
+    required this.msg,
+  });
 
-  bool send = true;
-  bool msg = false;
+  // bool send = true;
+  // bool msg = false;
 
   Route _createRoute() {
     return PageRouteBuilder(

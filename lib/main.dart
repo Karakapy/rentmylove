@@ -6,6 +6,7 @@ import 'package:rentmylove/screens/budget_screens/budget_screen.dart';
 import 'package:rentmylove/screens/calendar_screen.dart';
 import 'package:rentmylove/screens/edit_product_screen.dart';
 import 'package:rentmylove/screens/list_of_product_screen.dart';
+import 'color_preset.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: brown),
         useMaterial3: true,
       ),
       initialRoute: '/',
