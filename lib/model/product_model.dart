@@ -32,11 +32,11 @@ class ProductModel{
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return ProductModel(
-        productID: data["Product ID"],
-        color: data["Color"],
-        name: data["Name"],
-        quantity: data["Quantity"],
-        size: data["Size"]);
+        productID: data["Product ID"]??"",
+        color: data["Color"]??"",
+        name: data["Name"]??"",
+        quantity: data["Quantity"]??0,
+        size: data["Size"]??"");
 
   }
 

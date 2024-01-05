@@ -15,6 +15,12 @@ class OrderManager{
 
   }
 
+
+  static bool checkOrder(String productName, String size, String color, int amount){
+
+    return false;
+  }
+
   static OrderModel createOrder(String productName, String size, String color, DateTime bookingDate, int duration, String customerName, String method, int amount, String note){
     DateTime returnDate = bookingDate.add( Duration(days: duration));
     String productId = ProductManager.getProductID(productName, color, size);
@@ -24,6 +30,14 @@ class OrderManager{
 
   static String orderID(OrderModel currentOrder){
     return "${currentOrder.customerName.toLowerCase()}${currentOrder.productID.toLowerCase()}${currentOrder.startDate}${currentOrder.endDate}";
+  }
+
+  static bool checkItemExist(String id){
+    return ProductManager.getProduct(id).quantity > 0;
+  }
+
+  static void checkItemAvailable(String id, int amount){
+    print("TEST ${(amount - ProductManager.getProduct(id).quantity) > 0}");
   }
 
   static void uploadToFirebase(OrderModel currentOrder){

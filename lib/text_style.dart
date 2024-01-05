@@ -16,6 +16,13 @@ class RmlTextStyle {
     fontFamily: "Kanit"
   );
 
+  static const TextStyle headerTitle = TextStyle(
+      color: text,
+      fontSize: 22,
+      fontWeight: FontWeight.normal,
+      fontFamily: "Kanit"
+  );
+
   static const TextStyle normalText = TextStyle(
     color: text,
     fontSize: 17,

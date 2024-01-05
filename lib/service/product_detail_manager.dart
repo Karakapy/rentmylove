@@ -29,9 +29,17 @@ class ProductDetailManager{
     }
   }
 
+  static Future<void> addBrandToFireStore(String name) async {
+    await _firebaseFirestore.collection("product_detail").doc("addProduct").update({'brand': FieldValue.arrayUnion([name.toLowerCase()])});
+  }
+
 
   static List<String> getColorList(){
     return productDetailList.first.color;
+  }
+
+  static List<String> getBrandList(){
+    return productDetailList.first.brand;
   }
 
   static List<String> getSizeList(){

@@ -13,6 +13,8 @@ import 'package:rentmylove/service/order_manager.dart';
 import 'package:rentmylove/service/product_detail_manager.dart';
 import 'package:rentmylove/service/product_manager.dart';
 
+import 'model/product_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter binding is initialized
   await Firebase.initializeApp(
@@ -22,6 +24,9 @@ Future<void> main() async {
   await OrderManager.init();
   await ProductDetailManager.init();
   await ProductManager.init();
+  print(ProductManager.createProductID("Pants", "ขาว", "S"));
+  ProductManager.addProduct(ProductModel(color: "ขาว", name: "Pants", quantity: 20, size: "S", productID: ProductManager.createProductID("Pants", "ขาว", "S")));
+
   runApp(const MyApp());
 
 }
