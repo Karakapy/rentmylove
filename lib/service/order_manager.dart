@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rentmylove/model/income_model.dart';
 import 'package:rentmylove/model/order_model.dart';
@@ -9,9 +11,21 @@ import 'firebase_service.dart';
 class OrderManager{
   static late FirebaseFirestore _firebaseFirestore;
   static List<OrderModel> orderList = [];
+  static Map<DateTime, int> totalAmountByMonth = HashMap();
   static Future<void> init() async {
     _firebaseFirestore = firebaseService.getFirestore();
     orderList = await loadOrdersFromFirestore();
+
+
+  }
+
+  static void setUptotalAmount(){
+    DateTime currentDateTime = DateTime.now();
+    var now = DateTime(currentDateTime.year, currentDateTime.month, currentDateTime.day);
+    var nextYear = DateTime(now.year, now.month + 1, now.day);
+    for (int i = 0; i <= nextYear.difference(now).inDays; i++){
+      totalAmountByMonth[now.add(Duration(days: i))] = 0;
+    }
 
   }
 
@@ -40,12 +54,31 @@ class OrderManager{
     print("TEST ${(amount - ProductManager.getProduct(id).quantity) > 0}");
   }
 
-  static void checkAvailableDate(OrderModel currentOrder){
+  static List<DateTime> checkAvailableDate(OrderModel currentOrder){
+    List<DateTime> result = [];
+    setUptotalAmount();
     for(OrderModel order in orderList){
-      if(order.productID == currentOrder.productID && order.endDate.compareTo(currentOrder.startDate) > 0){
-        print("ORDER IS ${order.productID} ${order.amount}");
+      if(order.productID == currentOrder.productID){
+        for (int i = 0; i <= order.endDate.difference(order.startDate).inDays; i++){
+          int value = totalAmountByMonth[order.startDate.add(Duration(days: i))] ?? 0;
+          totalAmountByMonth[order.startDate.add(Duration(days: i))] = order.amount + value ;
+          print("DATE ${order.startDate.add(Duration(days: i))} AMOUNT ${order.amount + value}");
+        }
+
+        for (int i = 0; i <= order.endDate.difference(order.startDate).inDays; i++){
+          int value = totalAmountByMonth[order.startDate.add(Duration(days: i))] ?? 0;
+          if(order.productID == currentOrder.productID && ProductManager.getProduct(currentOrder.productID).quantity - (value + currentOrder.amount) < 0) {
+              result.add(order.startDate.add(Duration(days: i)));
+          }
+        }
       }
+
+
+
+
     }
+    print("TOTAL AMOUNT = ${totalAmountByMonth}");
+    return result.toSet().toList();
   }
 
 

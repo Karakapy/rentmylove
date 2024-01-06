@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rentmylove/model/order_model.dart';
 import 'package:rentmylove/service/order_manager.dart';
@@ -24,7 +25,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   List<String> colorList = [];
   bool isItemAvaliable = false;
   late TextEditingController amount;
-
+  bool outlinedSelected = false;
 
   String selectedName = "";
   String selectedSize = "";
@@ -242,6 +243,30 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 10),
+
+              Container(
+                child: IconButton.outlined(
+                  isSelected: outlinedSelected,
+                  icon: const Icon(Icons.settings_outlined),
+                  selectedIcon: const Icon(Icons.settings),
+                  onPressed: () async {
+                    DateTime? newDateTime = await showRoundedDatePicker(
+                      context: context,
+                      listDateDisabled: OrderManager.checkAvailableDate(
+                          OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
+                      ),
+                      theme: ThemeData.dark(),
+                    );
+                    setState(() {
+                      outlinedSelected = !outlinedSelected;
+
+                    });
+                  },
+                ),
+              ),
+
+
               const SizedBox(width: 10),
               const Text(
                 'รายละเอียดลูกค้า',
@@ -252,14 +277,14 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                   onPressed: isItemAvaliable ? (){
                     print("YES");
                     OrderManager.checkAvailableDate(
-                        OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
+                        OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day), 5, "Poon", "Fly", int.parse(amount.text), "note")
                     );
-
-                    // OrderManager.uploadToFirebase(
-                    //     OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
-                    // );
+                    OrderManager.uploadToFirebase(
+                        OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day), 5, "Poon", "Fly", int.parse(amount.text), "note")
+                    );
                   } : null
                   , child: Text('Submit')),
+
 
             ],
           ),

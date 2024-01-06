@@ -12,7 +12,6 @@ import 'package:rentmylove/service/firebase_service.dart';
 import 'package:rentmylove/service/order_manager.dart';
 import 'package:rentmylove/service/product_detail_manager.dart';
 import 'package:rentmylove/service/product_manager.dart';
-
 import 'model/product_model.dart';
 
 Future<void> main() async {
@@ -38,6 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'Rentmylove App',
       theme: ThemeData(
         // This is the theme of your application.
