@@ -16,8 +16,6 @@ class CalendarScreen extends StatefulWidget {
   State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-// List<Task> taskList = [];
-
 class _CalendarScreenState extends State<CalendarScreen> {
   late DateTime selectedDate;
   late List<Task> taskList = [];
@@ -133,7 +131,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   List<Task> _getDataSource() {
     final List<Task> meetings = <Task>[];
-    // final DateTime date = DateTime.now();
     for (var detail in jsonData) {
       final DateTime start = DateTime.parse(detail['startTime']);
       final DateTime end = DateTime.parse(detail['endTime']);
@@ -141,15 +138,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
       print("add: ${start}");
 
       bool hasStart = meetings.any((task) =>
-          task.from.year == start.year &&
-          task.from.month == start.month &&
-          task.from.day == start.day &&
+          _checkSameDate(task.from, start) &&
           task.color == green);
 
       bool hasEnd = meetings.any((task) =>
-          task.to.year == end.year &&
-          task.to.month == end.month &&
-          task.to.day == end.day &&
+          _checkSameDate(task.to, end) &&
           task.color == red);
 
       if (!hasStart) {
@@ -161,6 +154,66 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
     return meetings;
   }
+
+  Widget listView(DateTime selectedDate) {
+    List<DateTime> dateList = jsonData
+        .map((detail) =>
+    [
+      DateTime.parse(detail['startTime']),
+      DateTime.parse(detail['endTime'])
+    ]
+    )
+        .expand((dates) => dates)
+        .toList();
+
+    if (dateList.contains(selectedDate)) {
+      List<Map<String, dynamic>> filteredData = _filterJsonData(selectedDate);
+      return ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: filteredData.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            Map<String, dynamic> orderData = filteredData[index];
+            DateTime start = DateTime.parse(orderData['startTime']);
+            // DateTime end = DateTime.parse(orderData['endTime']);
+            return OrderCardWidget(
+              product: "hello",
+              productSize: "M",
+              productColor: "น้ำเงิน",
+              name: orderData['name'],
+              phone: "091-234-5678",
+              send: _checkSameDate(selectedDate, start)? true: false,
+              msg: orderData['Delivery Method']=='Post Man'? false: true,
+            );
+
+          });
+    } else {
+      return Container(
+          height: 150,
+          child: Center(
+            child: Text(
+              "ไม่มีคิว",
+              style: RmlTextStyle.normalText,
+            ),
+          ));
+    }
+  }
+}
+
+bool _checkSameDate(DateTime givenDate, DateTime selectedDate){
+  if ( givenDate.year == selectedDate.year &&
+      givenDate.month == selectedDate.month &&
+      givenDate.day == selectedDate.day) {
+    return true;
+  } else { return false; }
+}
+
+class Task {
+  Task(this.from, this.to, this.color);
+  DateTime from;
+  DateTime to;
+  Color color;
 }
 
 class TaskDataSource extends CalendarDataSource {
@@ -178,76 +231,19 @@ class TaskDataSource extends CalendarDataSource {
     return appointments![index].to;
   }
 
-  // @override
-  // String getSubject(int index) {
-  //   return appointments![index].eventName;
-  // }
-
   @override
   Color getColor(int index) {
     return appointments![index].color;
   }
 }
 
-class Task {
-  Task(this.from, this.to, this.color);
-  DateTime from;
-  DateTime to;
-  Color color;
-}
-
-Widget listView(DateTime selectedDate) {
-  List<DateTime> dateList = jsonData
-      .map((detail) =>
-  [
-    DateTime.parse(detail['startTime']),
-    DateTime.parse(detail['endTime'])
-  ]
-  )
-      .expand((dates) => dates)
-      .toList();
-
-  if (dateList.contains(selectedDate)) {
-    List<Map<String, dynamic>> filteredData = filterJsonData(selectedDate);
-    return ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: filteredData.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-        Map<String, dynamic> orderData = filteredData[index];
-        DateTime start = DateTime.parse(orderData['startTime']);
-        // DateTime end = DateTime.parse(orderData['endTime']);
-        return OrderCardWidget(
-              product: "hello",
-              productSize: "M",
-              productColor: "น้ำเงิน",
-              name: orderData['name'],
-              phone: "091-234-5678",
-              send: selectedDate.isAtSameMomentAs(start)? true: false,
-              msg: orderData['Delivery Method']=='Post Man'? false: true,
-        );
-
-        });
-  } else {
-    return Container(
-        height: 150,
-        child: Center(
-          child: Text(
-            "ไม่มีคิว",
-            style: RmlTextStyle.normalText,
-          ),
-        ));
-  }
-}
-
-List<Map<String, dynamic>> filterJsonData(DateTime selectedDate) {
+List<Map<String, dynamic>> _filterJsonData(DateTime selectedDate) {
   return jsonData.where((detail) {
     DateTime startTime = DateTime.parse(detail['startTime']);
     DateTime endTime = DateTime.parse(detail['endTime']);
 
-    return startTime.isAtSameMomentAs(selectedDate) ||
-        endTime.isAtSameMomentAs(selectedDate);
+    return _checkSameDate(startTime, selectedDate) ||
+        _checkSameDate(endTime, selectedDate);
   }).toList();
 }
 
