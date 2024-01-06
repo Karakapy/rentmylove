@@ -19,6 +19,10 @@ class OrderManager{
 
   }
 
+  static Future<void> refresh() async {
+    orderList = await loadOrdersFromFirestore();
+  }
+
   static void setUptotalAmount(){
     DateTime currentDateTime = DateTime.now();
     var now = DateTime(currentDateTime.year, currentDateTime.month, currentDateTime.day);

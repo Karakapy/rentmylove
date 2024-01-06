@@ -23,6 +23,7 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
   List<String> productNameList = [];
   List<String> sizeList = [];
   List<String> colorList = [];
+  List<DateTime> selectDate = [];
   bool isItemAvaliable = false;
   late TextEditingController amount;
   bool outlinedSelected = false;
@@ -244,22 +245,63 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-
               Container(
                 child: IconButton.outlined(
                   isSelected: outlinedSelected,
                   icon: const Icon(Icons.settings_outlined),
                   selectedIcon: const Icon(Icons.settings),
                   onPressed: () async {
+                    selectDate = [];
+                    await OrderManager.refresh();
                     DateTime? newDateTime = await showRoundedDatePicker(
                       context: context,
                       listDateDisabled: OrderManager.checkAvailableDate(
                           OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
                       ),
-                      theme: ThemeData.dark(),
+                      builderDay: (DateTime dateTime, bool isCurrentDay, bool isSelected, TextStyle defaultTextStyle){
+                        if (selectDate.contains(dateTime)) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.pink, width: 4),
+                                shape: BoxShape.circle),
+                            child: Center(
+                              child: Text(
+                                dateTime.day.toString(),
+                                style: defaultTextStyle,
+                              ),
+                            ),
+                          );
+                        }
+                        return Container(
+                          child: Center(
+                            child: Text(
+                              dateTime.day.toString(),
+                              style: defaultTextStyle,
+                            ),
+                          ),
+                        );
+
+                      },
+                      theme: ThemeData(primarySwatch: Colors.brown),
+                      onTapDay: (DateTime selectedDay, bool available){
+                        if(available){
+                          if(selectDate.contains(selectedDay)){
+                            selectDate.remove(selectedDay);
+                          } else{
+                            selectDate.add(selectedDay);
+                          }
+                          return true;
+                        }
+                        return true;
+                      }
+
                     );
                     setState(() {
                       outlinedSelected = !outlinedSelected;
+                      print("SEKECT DATE TIME $newDateTime");
+                      print("SEKECT DATE TIME $selectDate");
+
 
                     });
                   },
