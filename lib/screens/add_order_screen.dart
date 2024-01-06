@@ -166,7 +166,8 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                         );
                       }).toList(),
                     ),
-                    ),)
+                    ),
+                    )
                   ),
                 ],
               ),
@@ -250,7 +251,13 @@ class _AddOrderScreenState extends State<AddOrderScreen> {
                   style: ElevatedButton.styleFrom(onSurface: Colors.blue),
                   onPressed: isItemAvaliable ? (){
                     print("YES");
+                    OrderManager.checkAvailableDate(
+                        OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
+                    );
 
+                    // OrderManager.uploadToFirebase(
+                    //     OrderManager.createOrder(selectedName, selectedSize, selectedColor, DateTime.now(), 5, "Poon", "Fly", int.parse(amount.text), "note")
+                    // );
                   } : null
                   , child: Text('Submit')),
 

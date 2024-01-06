@@ -40,6 +40,15 @@ class OrderManager{
     print("TEST ${(amount - ProductManager.getProduct(id).quantity) > 0}");
   }
 
+  static void checkAvailableDate(OrderModel currentOrder){
+    for(OrderModel order in orderList){
+      if(order.productID == currentOrder.productID && order.endDate.compareTo(currentOrder.startDate) > 0){
+        print("ORDER IS ${order.productID} ${order.amount}");
+      }
+    }
+  }
+
+
   static void uploadToFirebase(OrderModel currentOrder){
     String currentOrderID = orderID(currentOrder);
     IncomeModel incomeModel = IncomeModel(date: DateTime.now(), orderID: currentOrderID, detail: "Income from Rent", amount: currentOrder.amount);
