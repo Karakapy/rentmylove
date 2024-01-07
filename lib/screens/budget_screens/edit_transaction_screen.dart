@@ -59,10 +59,10 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               const SizedBox(height: 10),
               const Text('รายการ', style: RmlTextStyle.normalText),
               const SizedBox(height: 5),
-              TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
+              TextFieldWidget(width: screenWidth, inputType: TextInputType.text, initialText: "hello",),
               const Text('จำนวนเงิน (บาท)', style: RmlTextStyle.normalText),
               const SizedBox(height: 5),
-              TextFieldWidget(width: screenWidth, inputType: TextInputType.number,),
+              TextFieldWidget(width: screenWidth, inputType: TextInputType.number, initialText: "50",),
               const Text('วัน/เดือน/ปี', style: RmlTextStyle.normalText),
               const SizedBox(height: 5),
               // calendar

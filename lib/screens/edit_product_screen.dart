@@ -28,15 +28,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 children: [
                   const Text(
-                    'เพิ่มชุด',
+                    'แก้ชุด',
                     style: RmlTextStyle.title,
                   ),
                   const SizedBox(height: 10),
                   const Text('ชื่อชุด', style: RmlTextStyle.normalText),
                   const SizedBox(height: 5),
-                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
+                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text, initialText: "hello",),
                   const SizedBox(height: 10),
-                  ProductListWidget(width: screenWidth),
+                  ProductListWidget(width: screenWidth, edit: true,),
                   const SizedBox(height: 185),
                   DeleteButtonWidget(
                     tapFunc: () {},

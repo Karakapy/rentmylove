@@ -59,10 +59,10 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             const SizedBox(height: 10),
             const Text('รายการ', style: RmlTextStyle.normalText),
             const SizedBox(height: 5),
-            TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
+            TextFieldWidget(width: screenWidth, inputType: TextInputType.text),
             const Text('จำนวนเงิน (บาท)', style: RmlTextStyle.normalText),
             const SizedBox(height: 5),
-            TextFieldWidget(width: screenWidth, inputType: TextInputType.number,),
+            TextFieldWidget(width: screenWidth, inputType: TextInputType.number),
             const Text('วัน/เดือน/ปี', style: RmlTextStyle.normalText),
             const SizedBox(height: 5),
             // calendar

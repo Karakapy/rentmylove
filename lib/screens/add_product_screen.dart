@@ -34,9 +34,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   const SizedBox(height: 10),
                   const Text('ชื่อชุด', style: RmlTextStyle.normalText),
                   const SizedBox(height: 5),
-                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text,),
+                  TextFieldWidget(width: screenWidth, inputType: TextInputType.text),
                   const SizedBox(height: 10),
-                  ProductListWidget(width: screenWidth),
+                  ProductListWidget(width: screenWidth, edit: false,),
                   const SizedBox(height: 250),
                   SaveButtonWidget(
                     tapFunc: () {},
