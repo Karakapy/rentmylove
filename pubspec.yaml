@@ -39,6 +39,7 @@ dependencies:
   dotted_border: ^2.1.0
   dropdown_button2: ^2.3.9
   calendar_date_picker2: ^0.5.3
+  draggable_home: ^1.0.5
 
 dev_dependencies:
   flutter_test:

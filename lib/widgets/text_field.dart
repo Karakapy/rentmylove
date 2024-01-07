@@ -4,8 +4,9 @@ import 'package:rentmylove/text_style.dart';
 class TextFieldWidget extends StatefulWidget {
   final double width;
   final TextInputType inputType;
+  String? initialText;
 
-  const TextFieldWidget({required this.width, required this.inputType});
+  TextFieldWidget({required this.width, required this.inputType, this.initialText});
 
   @override
   _TextFieldWidgetState createState() => _TextFieldWidgetState();
@@ -16,7 +17,8 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      child: TextField(
+      child: TextFormField(
+        initialValue:widget.initialText,
         style: RmlTextStyle.normalText,
         keyboardType: widget.inputType,
         decoration: InputDecoration(
@@ -25,7 +27,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           ),
           filled: true,
           fillColor: Colors.white,
-          contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+          contentPadding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
         ),
       ),
     );
