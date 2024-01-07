@@ -5,8 +5,9 @@ import 'package:rentmylove/widgets/text_field.dart';
 
 class ProductListWidget extends StatefulWidget {
   final double width;
+  final bool edit;
 
-  const ProductListWidget({required this.width});
+  const ProductListWidget({required this.width, required this.edit});
 
   @override
   State<ProductListWidget> createState() => _ProductListWidgetState();
@@ -38,6 +39,15 @@ class _ProductListWidgetState extends State<ProductListWidget> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.edit) {
+      selectedColor = colorList.first;
+      selectedSize = sizeList.first;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         width: widget.width,
@@ -50,42 +60,36 @@ class _ProductListWidgetState extends State<ProductListWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                     const Text("ไซซ์", style: RmlTextStyle.normalText,),
-                    DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          buttonStyleData: ButtonStyleData(
-                            width: widget.width * 0.7,
-                            height: 50,
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Colors.black26,
-                              ),
-                            ),
-                          ),
-                          dropdownStyleData: const DropdownStyleData(
-                              maxHeight: 200,
-                              width: 200,
-                          ),
-                          items: sizeList.map((String size) => DropdownMenuItem<String>(
-                            value: size,
-                            child: Text( size,
-                                style: RmlTextStyle.normalText
-                            ),
-                            // overflow: TextOverflow.ellipsis,
-                          ),).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              selectedSize = value;
-                              // selectedColor = null;
-                            });
-                            print(selectedSize);
-                          },
-                          value: selectedSize,
-                        )
+                Container(
+                  width: widget.width * 0.7,
+                  child:DropdownButtonFormField2(
+                    isExpanded: true,
+                    value: selectedSize,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.only(left: 5, right: 10),
+                      border: OutlineInputBorder( borderRadius:BorderRadius.circular(12)),
                     ),
-                  ],
+                    dropdownStyleData: const DropdownStyleData(
+                        maxHeight: 200
+                    ),
+                    items: sizeList.map((String size) => DropdownMenuItem<String>(
+                      value: size,
+                      child: Text(
+                        size,
+                        style: RmlTextStyle.normalText,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        selectedSize = value;
+                      });
+                    },
+                  ),
+              ),
+                ]
               ),
                 const SizedBox(height: 10),
                 Row(
@@ -93,24 +97,16 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                       const Text("สี", style: RmlTextStyle.normalText),
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2(
+                      Container(
+                        width: widget.width * 0.7,
+                        child:DropdownButtonFormField2(
                           isExpanded: true,
                           value: selectedColor,
-                          buttonStyleData: ButtonStyleData(
-                            width: widget.width * 0.7,
-                            height: 50,
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              // isDense: true,
-                              color: Colors.white,
-                              // contentPadding: EdgeInsets.zero,
-                              // border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Colors.black26,
-                              ),
-                            ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.only(left: 5, right: 10),
+                              border: OutlineInputBorder( borderRadius:BorderRadius.circular(12)),
                           ),
                           dropdownStyleData: const DropdownStyleData(
                               maxHeight: 200
@@ -130,7 +126,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                             });
                           },
                         ),
-                      ),
+                      )
               ],
             ),
             const SizedBox(height: 10),
@@ -139,6 +135,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("จำนวน",style: RmlTextStyle.normalText,),
+                    widget.edit?TextFieldWidget(width: widget.width * 0.7, inputType: TextInputType.number,initialText: "2",):
                     TextFieldWidget(width: widget.width * 0.7, inputType: TextInputType.number,),
 
                   ],
