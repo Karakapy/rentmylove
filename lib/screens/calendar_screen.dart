@@ -50,7 +50,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return DraggableHome(
-      leading: Spacer(),
+      // leading: Spacer(),
       title: const Text(
         "ออเดอร์",
         style: RmlTextStyle.sectionTitle,
@@ -89,22 +89,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           color: wallpaper,
           child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              "ออเดอร์",
-              style: RmlTextStyle.sectionTitle,
-            ),
-            IconButton(onPressed: () {
-              setState(() {
-                taskList = _getDataSource();
-                for (var data in taskList) {
-                  print(data.from);
-                }
-                print("refresh");
-              });
-            }, icon: Icon(Icons.refresh))
+              Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "ออเดอร์",
+                        style: RmlTextStyle.sectionTitle,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          taskList = _getDataSource();
+                          for (var data in taskList) {
+                            print(data.from);
+                          }
+                          print("refresh");
+                        });
+                      },
+                      icon: Icon(Icons.refresh),
+                    ),
           ]),
         ),
+
         listView(selectedDate),
       ],
     );
@@ -114,19 +121,22 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Container(
         padding: EdgeInsets.only(top: 80, bottom: 20),
         color: Colors.white,
-        child: SfCalendar(
-          view: CalendarView.month,
-          todayHighlightColor: brown,
-          cellBorderColor: Colors.transparent,
-          dataSource: TaskDataSource(taskList),
-          monthViewSettings: MonthViewSettings(
-              appointmentDisplayMode: MonthAppointmentDisplayMode.indicator),
-          onSelectionChanged: (detail) {
-            setState(() {
-              selectedDate = detail.date!;
-            });
-          },
-        ));
+        child: Container(
+          child: SfCalendar(
+              view: CalendarView.month,
+              todayHighlightColor: brown,
+              cellBorderColor: Colors.transparent,
+              dataSource: TaskDataSource(taskList),
+              monthViewSettings: MonthViewSettings(
+                  appointmentDisplayMode: MonthAppointmentDisplayMode.indicator),
+              onSelectionChanged: (detail) {
+                setState(() {
+                  selectedDate = detail.date!;
+                });
+              },
+        )
+        )
+    );
   }
 
   List<Task> _getDataSource() {
@@ -181,6 +191,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               product: "hello",
               productSize: "M",
               productColor: "น้ำเงิน",
+              amount: 2,
               name: orderData['name'],
               phone: "091-234-5678",
               send: _checkSameDate(selectedDate, start)? true: false,
@@ -252,6 +263,7 @@ List<Map<String, dynamic>> jsonData = [
     'id': 1,
     'name': 'John Doe',
     'Delivery Method': 'Post Man',
+    'Product':'',
     'startTime': '2023-12-17',
     'endTime': '2023-12-29',
   },

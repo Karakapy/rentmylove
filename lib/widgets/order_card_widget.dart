@@ -8,6 +8,7 @@ class OrderCardWidget extends StatelessWidget {
   String product;
   String productColor;
   String productSize;
+  int amount;
   String name;
   String phone;
   bool send;
@@ -17,6 +18,7 @@ class OrderCardWidget extends StatelessWidget {
     required this.product,
     required this.productColor,
     required this.productSize,
+    required this.amount,
     required this.name,
     required this.phone,
     required this.send,
@@ -93,7 +95,8 @@ class OrderCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(height:50),
+                Text("${this.amount} ชุด", style: RmlTextStyle.normalText,),
+            SizedBox(height:25),
               send == true?
                   msg == true?
                     Chip(
